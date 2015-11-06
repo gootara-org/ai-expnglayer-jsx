@@ -8,7 +8,7 @@
 		var folder = document.path && document.path.exists ? new Folder(document.path.fullName) : Folder.myDocuments;
 		var file = new File(folder.fullName + "/" + document.name + ".png");
 
-		file = file.saveDlg("•Û‘¶æ‚ğ‘I‘ğ‚µ‚Ä‚­‚¾‚³‚¢", "*.png");
+		file = file.saveDlg("ä¿å­˜å…ˆã‚’é¸æŠã—ã¦ãã ã•ã„", "*.png");
 		if (!file) { return; }
 		
 		var dpi = 72;
@@ -21,14 +21,14 @@
 		options.horizontalScale  = scale;
 
 		document.exportFile(file, ExportType.PNG24, options);
-		alert("ƒGƒNƒXƒ|[ƒg‚ªŠ®—¹‚µ‚Ü‚µ‚½B", "î•ñ");
+		alert("ã‚¨ã‚¯ã‚¹ãƒãƒ¼ãƒˆãŒå®Œäº†ã—ã¾ã—ãŸã€‚", "æƒ…å ±");
 	}
 	
 	try {
 		if (app.documents.length > 0 ) {
 			main(app.activeDocument);
 		} else {
-			throw new Error("ƒtƒ@ƒCƒ‹‚ªŠJ‚©‚ê‚Ä‚¢‚Ü‚¹‚ñB");
+			throw new Error("ãƒ•ã‚¡ã‚¤ãƒ«ãŒé–‹ã‹ã‚Œã¦ã„ã¾ã›ã‚“ã€‚");
 		}
 	} catch(e) {
 		alert(e.message, "Script Error", true);

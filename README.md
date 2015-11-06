@@ -13,7 +13,7 @@ Adobe Illustrator CC 2015
 
 INSTALL:
 ----------------
-To add menu item in `File` -> `Scripts`, install this script to the appropriate folder.
+To add menu item in `File` > `Scripts`, install this script to the appropriate folder.
 
 1. Copy `Export Top-Level Layers to PNG.jsx` script to `Presets` Folder.
 
@@ -30,7 +30,7 @@ A script could also be executed by `Other Script...` menu directly.
 
 USAGE:
 ----------------
-1. Choose `File` -> `Scripts` -> `Export Top-Level Layers to PNG` menu item.       
+1. Choose `File` > `Scripts` > `Export Top-Level Layers to PNG` menu item.       
 
 2. Set options, and press `Generate` button.  
 
@@ -40,7 +40,7 @@ USAGE:
 DETAILS:
 ----------------
   + When the script file name include the Menu key, such as `(&L)`,
-    you can also execute a script by pressing keys in the order of `ALT -> F -> R -> L`
+    you can also execute a script by pressing keys in the order of `ALT > F > R > L`
     under the Microsft Windows platform.  
     (It's not effective on Mac.)
 
