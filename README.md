@@ -2,7 +2,7 @@ ai-expnglayer-jsx
 =================
 Adobe Illustrator JavaScript ExtendScript for exporting top-level layers to multiple PNG files.
 
-![alt text](https://raw.githubusercontent.com/gootara-org/ai-expnglayer-jsx/master/images/settings.png "Settings")
+![Settings](https://raw.githubusercontent.com/gootara-org/ai-expnglayer-jsx/master/images/settings.png "Settings")
 
 
 PREREQUISITES:
@@ -18,7 +18,7 @@ To add menu item in `File` > `Scripts`, install this script to the appropriate f
 1. Copy `Export Top-Level Layers to PNG.jsx` script to `Presets` Folder.
 
     + Windows  
-      `C:\Program Files\Adobe\Adobe Illustrator CC 2015\Presets\en_US\Scripts`
+      `C:\Program Files\Adobe\Adobe Illustrator CC 2015\Presets\en_US\Scripts\`
     + Mac  
       `/Applications/Adobe Illustrator CC 2015/Presets.localized/en_US/Scripts/`
 
@@ -34,7 +34,7 @@ USAGE:
 
 2. Set options, and press `Generate` button.  
 
-    ![alt text](https://raw.githubusercontent.com/gootara-org/ai-expnglayer-jsx/master/images/settings.png "Settings")
+    ![Settings](https://raw.githubusercontent.com/gootara-org/ai-expnglayer-jsx/master/images/settings.png "Settings")
 
 
 DETAILS:
@@ -53,13 +53,13 @@ DETAILS:
     For example, in the case such as the following, `text` and `base` layer will not be output
     because it is locked, on the other hand `pageN` layers will be output in order.
 
-    ![alt text](https://raw.githubusercontent.com/gootara-org/ai-expnglayer-jsx/master/images/layers.png "Layers")
+    ![Layers](https://raw.githubusercontent.com/gootara-org/ai-expnglayer-jsx/master/images/layers.png "Layers")
 
     (However, all of the top-level layers will be output when `Include Locked Layers` is checked.)
 
   + The layer visibilities will be restored to it's original state after executed.
 
-  + Only active Artboard will be output when "Clip to Artboard" is checked.
+  + Only active Artboard will be output when `Clip to Artboard` is checked.
 
 
 APPENDEX:
