@@ -2,7 +2,7 @@ ai-expnglayer-jsx
 =================
 最上位レイヤーを個別に PNG に出力する、Adobe Illustrator 用の JavaScript 製 ExtendScript です。
 
-![alt text](https://raw.github.com/gootara-org/ai-expnglayer-jsx/images/settings_ja.png "Settings")
+![alt text](https://raw.githubusercontent.com/gootara-org/ai-expnglayer-jsx/master/images/settings_ja.png "Settings")
 
 
 動作環境：
@@ -34,12 +34,12 @@ Adobe Illustrator CC 2015
 
 2. オプションを設定して、「生成」ボタンを押下します。  
 
-    ![alt text](https://raw.github.com/gootara-org/ai-expnglayer-jsx/images/settings_ja.png "Settings")
+    ![alt text](https://raw.githubusercontent.com/gootara-org/ai-expnglayer-jsx/master/images/settings_ja.png "Settings")
 
 
 補足：
 ----------------
-  + スクリプトのファイル名に「(&L)」のようにメニューキーを含めておくと、Windows 環境であれば
+  + スクリプトのファイル名に `(&L)` のようにメニューキーを含めておくと、Windows 環境であれば
    「ALT→F→R→L」の順番にキーを押すことでも、スクリプトを実行できます。  
   （ショートカットキーを割り当てられないが故の苦肉の策です。Mac では ScriptKeyAi 等をどうぞ）
 
@@ -52,7 +52,7 @@ Adobe Illustrator CC 2015
     例えば、以下のような場合は、`text` と `base` はロックされているので出力されず、
     `pageN`が順番に出力されます。
 
-    ![alt text](https://raw.github.com/gootara-org/ai-expnglayer-jsx/images/layers.png "Layers")
+    ![alt text](https://raw.githubusercontent.com/gootara-org/ai-expnglayer-jsx/master/images/layers.png "Layers")
 
     （但し、`ロックされたレイヤーを含める` をオンにすると、常に全ての最上位レイヤーを出力します）
 

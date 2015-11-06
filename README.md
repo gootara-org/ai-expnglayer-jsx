@@ -2,7 +2,7 @@ ai-expnglayer-jsx
 =================
 Adobe Illustrator JavaScript ExtendScript for exporting top-level layers to multiple PNG files.
 
-![alt text](https://raw.github.com/gootara-org/ai-expnglayer-jsx/images/settings.png "Settings")
+![alt text](https://raw.githubusercontent.com/gootara-org/ai-expnglayer-jsx/master/images/settings.png "Settings")
 
 
 PREREQUISITES:
@@ -34,7 +34,7 @@ USAGE:
 
 2. Set options, and press `Generate` button.  
 
-    ![alt text](https://raw.github.com/gootara-org/ai-expnglayer-jsx/images/settings.png "Settings")
+    ![alt text](https://raw.githubusercontent.com/gootara-org/ai-expnglayer-jsx/master/images/settings.png "Settings")
 
 
 DETAILS:
@@ -53,7 +53,7 @@ DETAILS:
     For example, in the case such as the following, `text` and `base` layer will not be output
     because it is locked, on the other hand `pageN` layers will be output in order.
 
-    ![alt text](https://raw.github.com/gootara-org/ai-expnglayer-jsx/images/layers.png "Layers")
+    ![alt text](https://raw.githubusercontent.com/gootara-org/ai-expnglayer-jsx/master/images/layers.png "Layers")
 
     (However, all of the top-level layers will be output when `Include Locked Layers` is checked.)
 
