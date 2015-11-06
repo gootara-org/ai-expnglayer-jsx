@@ -64,4 +64,4 @@ DETAILS:
 
 APPENDEX:
 ----------------
-  + `Export Current Artboard to PNG.jsx` is simple script for exporting current active Artboard to a PNG file.
+  + `Export Current Document to PNG.jsx` is simple script for exporting current active Artboard to a PNG file.
