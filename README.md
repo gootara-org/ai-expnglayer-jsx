@@ -72,5 +72,5 @@ CHANGE LOG:
 2015/11/09
   + Add matte option.
   + The locked layer's visibility will not be changed when `Include Locked Layers` turned off.
-    As a result, the locked layers could be output as background.
-    If you don't need to output locked layers, hide layers before generating.
+    As this result, the locked layers could be included in the output as the background (or foreground).
+    If you don't need to output any locked layers, hide these before generating.
