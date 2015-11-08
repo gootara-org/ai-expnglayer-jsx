@@ -30,7 +30,7 @@ A script could also be executed by `Other Script...` menu directly.
 
 USAGE:
 ----------------
-1. Choose `File` > `Scripts` > `Export Top-Level Layers to PNG` menu item.       
+1. Choose `File` > `Scripts` > `Export Top-Level Layers to PNG` menu item.
 
 2. Set options, and press `Generate` button.  
 
@@ -65,3 +65,12 @@ DETAILS:
 APPENDEX:
 ----------------
   + `Export Current Document to PNG.jsx` is simple script for exporting current active Artboard to a PNG file.
+
+
+CHANGE LOG:
+----------------
+2015/11/09
+  + Add matte option.
+  + The locked layer's visibility will not be changed when `Include Locked Layers` turned off.
+    As a result, the locked layers could be output as background.
+    If you don't need to output locked layers, hide layers before generating.

@@ -1,23 +1,77 @@
 #target illustrator
 
 (function(){
+	var resources = {
+		dialogTitle : "Export Top-Level Layers to multiple PNG"
+	,	includeLocked : "Include Locked Layers"
+	,	artBoardClipping : "Clip to Artboard"
+	,	transparency : "Transparency"
+	,	matte : "Matte"
+	,	choose : "Choose..."
+	,	dpi : "DPI"
+	,	saveTo : "Save to"
+	,	generate : "Generate"
+	,	cancel : "Cancel"
+	,	information : "Information"
+	, infoFinishExport : "PNG export was finished."
+	,	error : "Error"
+	,	errorNotExists : "Choose existing folder."
+	, errorNotOpened : "No document was opened."
+	};
 
 	function showSettings(defaultFolder) {
-		var dialog = new Window("dialog", "Export Top-Level Layers to multiple PNG", [0, 0, 400, 210]);
-		
-		dialog.includeLocked = dialog.add("checkbox", [20, 20, 380, 50], "Include Locked Layers");
-		dialog.artBoardClipping = dialog.add("checkbox", [20, 50, 380, 80], "Clip to Artboard");
+		var dialog = new Window("dialog", resources.dialogTitle, [0, 0, 400, 240]);
+		var y = 20;
+
+		dialog.includeLocked = dialog.add("checkbox", [20, y, 380, y+=30], resources.includeLocked);
+		dialog.artBoardClipping = dialog.add("checkbox", [20, y, 380, y+=30], resources.artBoardClipping);
 		dialog.artBoardClipping.value = true;
-		dialog.transparency = dialog.add("checkbox", [20, 80, 190, 110], "Transparency");
+
+		dialog.transparency = dialog.add("checkbox", [20, y, 100, y+30], resources.transparency);
 		dialog.transparency.value = true;
-		dialog.dpiLabel = dialog.add("statictext", [210, 75, 240, 105], "DPI")
+		dialog.transparency.onClick = function() {
+			dialog.matte.enabled = !dialog.transparency.value;
+			dialog.matte.onClick();
+		}
+		dialog.matte = dialog.add("checkbox", [150, y, 222, y+30], resources.matte);
+		dialog.matte.justify = "right";
+		dialog.matte.value = true;
+		dialog.matte.enabled = false;
+		dialog.matte.onClick = function() {
+			dialog.matteRGB.enabled = !dialog.transparency.value && dialog.matte.value;
+			dialog.matteRGB.onChanging();
+		}
+		dialog.matteRGB = dialog.add("edittext", [230, y-5, 300, y+25], "ffffff");
+		dialog.matteRGB.enabled = false;
+		dialog.matteRGB.onChanging = function() {
+			dialog.matteRGBColor.enabled = dialog.matteRGB.enabled;
+			if (!dialog.matteRGBColor.enabled) { return; }
+			var rgb = (dialog.matteRGB.text + "ffffff").substring(0,6);
+			if (isNaN(parseInt(rgb))) {
+				rgb = "ffffff";
+			}
+			var g = dialog.matteRGBColor.graphics;
+			g.backgroundColor = g.newBrush(g.BrushType.SOLID_COLOR
+			, [
+					parseInt(rgb.substring(0, 2), 16) / 255
+				, parseInt(rgb.substring(2, 4), 16) / 255
+				, parseInt(rgb.substring(4, 6), 16) / 255
+				, 1
+				]
+			);
+		}
+		dialog.matteRGBColor = dialog.add("panel", [308, y-5, 380, y+25], "", { borderStyle: "sunken" });
+
+		y += 30;
+		dialog.dpiLabel = dialog.add("statictext", [150, y-5, 222, y+25], resources.dpi)
 		dialog.dpiLabel.justify = "right";
-		dialog.dpi = dialog.add("edittext", [250, 75, 300, 105], "72");
-		
-		dialog.folderLabel = dialog.add("statictext", [20, 110, 76, 140], "Save to")
+		dialog.dpi = dialog.add("edittext", [230, y-5, 300, y+25], "72");
+
+		y += 30;
+		dialog.folderLabel = dialog.add("statictext", [20, y, 72, y+30], resources.saveTo)
 		dialog.folderLabel.justify = "right";
-		dialog.folder = dialog.add("edittext", [80, 110, 300, 140], defaultFolder.fullName);
-		dialog.folderBtn = dialog.add("button", [304, 110, 380, 140], "Choose...");
+		dialog.folder = dialog.add("edittext", [80, y, 300, y+30], defaultFolder.fullName);
+		dialog.folderBtn = dialog.add("button", [308, y, 380, y+30], resources.choose);
 		dialog.folderBtn.onClick = function() {
 			if (!dialog.active) { return; }
 			var folder = new Folder(dialog.folder.text);
@@ -26,33 +80,44 @@
 				dialog.folder.text = folder.fullName;
 			}
 		}
-		
-		dialog.okBtn = dialog.add("button", [80,160,180,190], "Generate", { name: "ok" });
+
+		y = dialog.bounds.bottom - 50;
+		dialog.okBtn = dialog.add("button", [80, y, 180, y+30], resources.generate, { name: "ok" });
 		dialog.okBtn.onClick = function() {
 			if (!dialog.active) { return; }
 			var folder = new Folder(dialog.folder.text);
 			if (!folder.exists) {
-				alert("Choose existing folder. [" + folder.fullName + "}", "Error", true);
+				alert(resources.errorNotExists + " [" + folder.fullName + "]", resources.error, true);
 				return;
 			}
 			dialog.close(1);
 		}
-		dialog.cancelBtn = dialog.add("button", [220,160,320,190], "Cancel", { name: "cancel" });
+		dialog.cancelBtn = dialog.add("button", [220, y, 320, y+30], resources.cancel, { name: "cancel" });
 		dialog.cancelBtn.onClick = function() {
 			dialog.close(0);
 		}
-		
+
 		dialog.center();
 		if (dialog.show() != 1) {
 			return null;
 		}
-		
+
+		var rgb = (dialog.matteRGB.text + "ffffff").substring(0,6);
+		if (isNaN(parseInt(rgb))) {
+			rgb = "ffffff";
+		}
+		var matteColor = new RGBColor();
+		matteColor.red = parseInt(rgb.substring(0, 2), 16);
+		matteColor.green = parseInt(rgb.substring(2, 4), 16);
+		matteColor.blue = parseInt(rgb.substring(4, 6), 16);
 		return {
 			folder : new Folder(dialog.folder.text)
 		,	includeLocked : dialog.includeLocked.value
 		,	artBoardClipping : dialog.artBoardClipping.value
 		,	transparency : dialog.transparency.value
 		,	dpi : parseInt(dialog.dpi.text)
+		, matte : dialog.matte.value
+		, matteColor : matteColor
 		};
 	}
 
@@ -61,12 +126,14 @@
 
 		var settings = showSettings(document.path && document.path.exists ? new Folder(document.path.fullName) : Folder.myDocuments);
 		if (!settings) { return; }
-		
+
 		var scale = (settings.dpi / 72) * 100;
 		var options = new ExportOptionsPNG24();
 		options.antiAliasing 	= true;
 		options.transparency 	= settings.transparency;
 		options.artBoardClipping = settings.artBoardClipping;
+		options.matte = settings.matte;
+		options.matteColor = settings.matteColor;
 		options.verticalScale	= scale;
 		options.horizontalScale  = scale;
 
@@ -74,9 +141,10 @@
 		var file, i;
 		for (i = 0; i < document.layers.length; i++) {
 			visibilities[i] = document.layers[i].visible;
+			if (!settings.includeLocked && document.layers[i].locked) { continue; }
 			document.layers[i].visible = false;
 		}
-		
+
 		for (i = 0; i < document.layers.length; i++) {
 			if (!settings.includeLocked && document.layers[i].locked) {
 				continue;
@@ -90,19 +158,20 @@
 		}
 
 		for (i = 0; i < document.layers.length; i++) {
+			if (!settings.includeLocked && document.layers[i].locked) { continue; }
 			document.layers[i].visible = visibilities[i];
 		}
 
-		alert("PNG export was finished.", "Information");
+		alert(resources.infoFinishExport, resources.information);
 	}
 
 	try {
 		if (app.documents.length > 0 ) {
 			main(app.activeDocument);
 		} else {
-			throw new Error("No document was opened.");
+			throw new Error(resources.errorNotOpened);
 		}
 	} catch(e) {
-		alert(e.message, "Script Error", true);
+		alert(e.message, resources.error, true);
 	}
 })();
